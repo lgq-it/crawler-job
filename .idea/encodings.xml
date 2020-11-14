@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-item" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-item/crawler-item-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-item/crawler-item-pulldata-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-item/crawler-item-showdata-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-search/src/test/java/com/PullDataElasticSearch.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-search/src/test/java/com/SearchTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/crawler-zuul" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

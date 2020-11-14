@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: item-pulldata-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///crawler
+    username: root
+    password: "000829"
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  rabbitmq:   #消息队列
+    host: 192.168.75.130
+    username: crawler
+    password: crawler
+    virtual-host: /crawler
+    template:
+      exchange: CRAWLER.ITEM.EXCHANGE  #默认交换机
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+
+#拉取的信息的网站   fiveonejob--前程无忧,因为分页参数原因，因此将url切成2段    gongzuo--工作网    liepin--猎聘
+pull:
+  url:
+    fiveonejob1: "https://search.51job.com/list/000000,000000,0000,01%252C32,9,99,java,2,"
+    fiveonejob2: ".html?lang=c&stype=&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&providesalary=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare="
+    gongzuo: "http://www.job.cn/job/list/0-0-0-0_0_0_0_0_0_0_0-0-0-0-0.html?java"
+    liepin: "https://www.liepin.com/zhaopin/?compkind=&dqs=&pubTime=&pageSize=40&salary=&compTag=&sortFlag=&compIds=&subIndustry=&jobKind=&industries=&compscale=&key=java&siTag=k_cloHQj_hyIn0SLM9IfRg%7EV6MwPcZ2ne9zYObRj7X8Rg&d_sfrom=search_industry&d_ckId=93af1a3b1551f4025762d7cdcbb00ddd&d_curPage=0&d_pageSize=40&d_headId=1e95cad6c09872b8a6fdc911bf547ab8"

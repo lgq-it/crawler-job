@@ -1,0 +1,21 @@
+server:
+  port: 10087
+
+spring:
+  application:
+    name: crawler-zuul
+
+zuul:
+  prefix: /api
+  routes:
+    item-showdata-service: /showData/**
+    CRAWLER-SEARCH: /search/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  server:
+    eviction-interval-timer-in-ms: 5000 #剔除无效连接的间隔时间
+    enable-replicated-request-compression: false #关闭自我保护

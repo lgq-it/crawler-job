@@ -1,0 +1,20 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: item-showdata-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///crawler
+    username: root
+    password: "000829"
+  jpa:
+     database: mysql
+     hibernate:
+       ddl-auto: update
+     show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

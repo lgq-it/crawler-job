@@ -1,0 +1,17 @@
+server:
+  port: 10086
+
+spring:
+  application:
+    name: crawler-eureka
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    register-with-eureka: false #不将自己注册到eureka
+    fetch-registry: false  #不拉取服务注册的信息
+
+  server:
+    enable-self-preservation: false  #关闭自动保护
+    eviction-interval-timer-in-ms: 10000

@@ -1,0 +1,23 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: crawler-search
+  data:
+    elasticsearch:  #elasticSearch
+      cluster-nodes: 192.168.75.130:9300
+  jackson:
+    default-property-inclusion: non_null
+  rabbitmq:   #消息队列
+    host: 192.168.75.130
+    username: crawler
+    password: crawler
+    virtual-host: /crawler
+
+eureka:
+  client:
+    service-url:
+      defaultZone:  http://localhost:10086/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
