@@ -17,18 +17,18 @@ public class JobInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String companyName;
-    private String companyAddr;
-    private String companyInfo;
-    private String jobName;
-    private String jobAddr;
-    private String jobInfo;
-    private Integer salaryMin;
-    private Integer salaryMax;
-    private String url;
-    private Date time;
-    //@Transient jap的忽略映射注解
-    private String jobCondition;  //招聘条件 json格式
+    private String companyName;  //公司名称
+    private String companyAddr;  //公司地址
+    private String companyInfo;  //公司详情
+    private String jobName;      //工作名称
+    private String jobAddr;      //工作地点
+    private String jobInfo;      //工作详情
+    private Integer salaryMin;   //最低年薪
+    private Integer salaryMax;   //最高年薪
+    private String url;          //招聘url
+    private Date time;           //发布时间
+    //@Transient jap的忽略映射注解  招聘条件 json格式
+    private String jobCondition;
     //根据代号确定数据来源是什么网站   1：前程无忧  2：工作网  3：猎聘
     private Integer code;
     //公司福利

@@ -1,12 +1,14 @@
 package com.liuguoqing.crawler.item.pulldata.take;
 
 import com.liuguoqing.crawler.item.pulldata.config.UrlConfig;
-import com.liuguoqing.crawler.item.pulldata.take.pipeline.FiveOneJobPipeline;
+import com.liuguoqing.crawler.item.pulldata.take.pipeline.SaveJobInfoIsDataBasePipeline;
 import com.liuguoqing.crawler.item.pulldata.take.processor.FiveOneJobProcessor;
+import com.liuguoqing.crawler.item.pulldata.take.processor.ZhaoPingJobProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 
@@ -26,23 +28,32 @@ public class Run {
     @Autowired
     private FiveOneJobProcessor fiveOneJobProcessor;
     @Autowired
-    private FiveOneJobPipeline fiveOneJobPipeline;
+    private SaveJobInfoIsDataBasePipeline saveJobInfoIsDataBasePipeline;
+
+    @Autowired
+    private ZhaoPingJobProcessor zhaoPingJobProcessor;
 
 
 //    @Scheduled( cron = "0 0 12 * * ?")
     @Scheduled(initialDelay = 1000 * 3, fixedDelay = 1000 * 10)
     public void run(){
-        String fiveonejob1 = this.urlConfig.getUrl().get("fiveonejob1");
-        String fiveonejob2 = this.urlConfig.getUrl().get("fiveonejob2");
-        Spider.create(this.fiveOneJobProcessor)
-                .addUrl(fiveonejob1+"1"+fiveonejob2) //起始的url地址
-                //.thread(10)  //设置线程个数
-                .setScheduler(new QueueScheduler()
-                        .setDuplicateRemover(
-                                new BloomFilterDuplicateRemover(10000000)
-                        )
-                ) //参数设置需要对多少条数据去重
-                .addPipeline(this.fiveOneJobPipeline)
+
+        //抓取招聘网信息
+        this.createSpider(this.zhaoPingJobProcessor,this.urlConfig.getZhaoPing(),10);
+
+        //抓取前程无忧
+        String fiveOneJobUrl = this.urlConfig.getUrl().get("fiveonejob1") + "1" + this.urlConfig.getUrl().get("fiveonejob2");
+        this.createSpider(this.fiveOneJobProcessor,fiveOneJobUrl,1);
+
+    }
+
+
+    private void createSpider(PageProcessor jobPageProcessor,String url,int threadNum){
+        Spider.create(jobPageProcessor)
+                .addUrl(url)
+                .addPipeline(this.saveJobInfoIsDataBasePipeline)
+                .setScheduler(new QueueScheduler().setDuplicateRemover(new BloomFilterDuplicateRemover(100000)))
+                .thread(threadNum)
                 .run();
     }
 

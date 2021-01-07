@@ -18,18 +18,25 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "pull")
 public class UrlConfig {
     //用于获取爬取的url地址
-    private  Map<String,String> url = new HashMap<>();
+    private Map<String, String> url = new HashMap<>();
+
     public Map<String, String> getUrl() {
         return url;
     }
+
     public void setUrl(Map<String, String> url) {
         this.url = url;
     }
 
-    public String getFiveOneJob1(){
+    public String getFiveOneJob1() {
         return url.get("fiveonejob1");
     }
-    public String getFiveOneJob2(){
+
+    public String getFiveOneJob2() {
         return url.get("fiveonejob2");
+    }
+
+    public String getZhaoPing(){
+        return url.get("zhaopin");
     }
 }

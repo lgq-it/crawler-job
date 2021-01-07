@@ -24,7 +24,7 @@ public class JsonRootBean {
     private String curr_page;
     private Integer total_page;
     private List<String> keyword_ads;
-    private List<Job_search_assistance> job_search_assistance;
+    private String job_search_assistance;
     private String seo_title;
     private String seo_description;
     private String seo_keywords;
@@ -141,11 +141,11 @@ public class JsonRootBean {
         this.keyword_ads = keyword_ads;
     }
 
-    public List<Job_search_assistance> getJob_search_assistance() {
+    public String getJob_search_assistance() {
         return job_search_assistance;
     }
 
-    public void setJob_search_assistance(List<Job_search_assistance> job_search_assistance) {
+    public void setJob_search_assistance(String job_search_assistance) {
         this.job_search_assistance = job_search_assistance;
     }
 

@@ -24,7 +24,8 @@ public class SearchJobInfo {
     private Long id;
 
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
-    private String all;  //搜索条件  包含了职位名称以及公司名称
+    //搜索条件  包含了职位名称以及公司名称
+    private String all;
 
     private String companyAddr;  //公司所在城市 通过搜索框获取城市信息
 

@@ -147,11 +147,7 @@ public class FiveOneJobProcessor implements PageProcessor {
                     jobInfo.setTime(result.getIssuedate());    //职位发布时间
 
                     //将招聘条件封装成map，然后转换成对应的json格式的字符串，存入数据库中
-                    Map<String, String> jobCondition = new HashMap<>();
-                    jobCondition.put("工作经验", result.getAttribute_text().get(1));
-                    jobCondition.put("学历", result.getAttribute_text().get(2));
-                    jobCondition.put("招聘人数", result.getAttribute_text().get(3));
-                    jobInfo.setJobCondition(JsonUtils.serialize(jobCondition));  //招聘条件
+                    jobInfo.setJobCondition(JobUtil.getJobCondition(result.getAttribute_text().get(1),result.getAttribute_text().get(2),result.getAttribute_text().get(3)));  //招聘条件
 
 
                     String[] split = html.css("div.job_msg").all().toString().split("<p class=\"fp\">");

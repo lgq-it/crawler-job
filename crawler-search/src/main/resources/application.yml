@@ -4,7 +4,7 @@ spring:
   application:
     name: crawler-search
   data:
-    elasticsearch:  #elasticSearch
+    elasticsearch:
       cluster-nodes: 192.168.75.130:9300
   jackson:
     default-property-inclusion: non_null
