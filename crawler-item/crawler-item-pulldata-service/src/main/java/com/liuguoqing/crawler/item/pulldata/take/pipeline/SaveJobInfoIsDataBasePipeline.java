@@ -34,8 +34,6 @@ public class SaveJobInfoIsDataBasePipeline implements Pipeline {
                 this.jobInfoServiceImpl.save((JobInfo) value);
             }
         }
-
-        System.out.println();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.liuguoqing.crawler.item.pulldata.take;
+package com.liuguoqing.crawler.item.pulldata.take.run;
 
 import com.liuguoqing.crawler.item.pulldata.config.UrlConfig;
 import com.liuguoqing.crawler.item.pulldata.take.pipeline.SaveJobInfoIsDataBasePipeline;
@@ -34,27 +34,18 @@ public class Run {
     private ZhaoPingJobProcessor zhaoPingJobProcessor;
 
 
-//    @Scheduled( cron = "0 0 12 * * ?")
+//  @Scheduled( cron = "0 0 12 * * ?")
     @Scheduled(initialDelay = 1000 * 3, fixedDelay = 1000 * 10)
     public void run(){
-
         //抓取招聘网信息
-        this.createSpider(this.zhaoPingJobProcessor,this.urlConfig.getZhaoPing(),10);
+        Thread zhaoping = new Thread(new RunThread(this.zhaoPingJobProcessor,this.urlConfig.getZhaoPing(),saveJobInfoIsDataBasePipeline,10));
+        zhaoping.start();
 
         //抓取前程无忧
         String fiveOneJobUrl = this.urlConfig.getUrl().get("fiveonejob1") + "1" + this.urlConfig.getUrl().get("fiveonejob2");
-        this.createSpider(this.fiveOneJobProcessor,fiveOneJobUrl,1);
-
+        Thread fiveOneJob = new Thread(new RunThread(this.fiveOneJobProcessor,fiveOneJobUrl,saveJobInfoIsDataBasePipeline,1));
+        fiveOneJob.start();
     }
 
-
-    private void createSpider(PageProcessor jobPageProcessor,String url,int threadNum){
-        Spider.create(jobPageProcessor)
-                .addUrl(url)
-                .addPipeline(this.saveJobInfoIsDataBasePipeline)
-                .setScheduler(new QueueScheduler().setDuplicateRemover(new BloomFilterDuplicateRemover(100000)))
-                .thread(threadNum)
-                .run();
-    }
 
 }
